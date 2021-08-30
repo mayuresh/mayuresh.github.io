@@ -46,6 +46,17 @@ download.addEventListener('click', function(e) {
   link.delete;
 });
 
+function drawCircle(ctx, width, height, color) {
+  ctx.beginPath();
+  x = Math.floor((Math.random() * width) + 1);
+  y = Math.floor((Math.random() * height) + 1);
+  size = Math.floor((Math.random() * height) + 1);
+  ctx.arc(x, y, size, 0, 2 * Math.PI);
+  ctx.fillStyle = color;
+  ctx.fill();
+  ctx.stroke();
+}
+    
 function draw() {
 
 var c = document.getElementById("myCanvas");
@@ -60,15 +71,7 @@ c.height = Math.floor((Math.random() * screen.availHeight) + 1);
 iterations = Math.floor((Math.random() * 200) + 1); 
 
 for (let i = 0; i < iterations; i = i + 1) {
-  ctx.beginPath();
-  x = Math.floor((Math.random() * c.width) + 1);
-  y = Math.floor((Math.random() * c.height) + 1);
-  size = Math.floor((Math.random() * c.height) + 1);
-  ctx.arc(x, y, size, 0, 2 * Math.PI);
-  ctx.fillStyle = getRandomColor();
-  ctx.fill();
-  ctx.stroke();
-
+  drawCircle(ctx, c.width, c.height, getRandomColor());
   ctx.beginPath();
   x = Math.floor((Math.random() * c.width) + 1);
   y = Math.floor((Math.random() * c.height) + 1);
