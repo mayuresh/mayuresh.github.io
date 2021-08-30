@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<body>
+<button id="download">Download</button>
+<button id="create">Create</button>
+<br />
+<br />
+
+<canvas id="myCanvas" width="640" height="480" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    var letter = '';
+    for (var i = 0; i < 3; i++ ) {
+        letter = letters[Math.round(Math.random() * 15)];
+        color += letter;
+        color += letter;
+    }
+    return color;
+}
+
+function makeword(len) {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  for (var i = 0; i < len; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
+}
+
+const create = document.getElementById('create');
+create.addEventListener('click', function(e) {
+  draw();
+});
+
+const download = document.getElementById('download');
+download.addEventListener('click', function(e) {
+  var link = document.createElement('a');
+  link.download = 'download.png';
+  link.href = document.getElementById("myCanvas").toDataURL()
+  link.click();
+  link.delete;
+});
+
+function draw() {
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+
+var x = 0;
+var y = 0;
+
+c.width = Math.floor((Math.random() * 1024) + 1);
+c.height = Math.floor((Math.random() * 1024) + 1);
+
+iterations = Math.floor((Math.random() * 200) + 1); 
+
+for (let i = 0; i < iterations; i = i + 1) {
+  ctx.beginPath();
+  x = Math.floor((Math.random() * c.width) + 1);
+  y = Math.floor((Math.random() * c.height) + 1);
+  size = Math.floor((Math.random() * c.height) + 1);
+  ctx.arc(x, y, size, 0, 2 * Math.PI);
+  ctx.fillStyle = getRandomColor();
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.beginPath();
+  x = Math.floor((Math.random() * c.width) + 1);
+  y = Math.floor((Math.random() * c.height) + 1);
+  w = Math.floor((Math.random() * c.width) + 1);
+  h = Math.floor((Math.random() * c.height) + 1);
+  ctx.rect(x,y,w,h);
+  ctx.fillStyle = getRandomColor();
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.beginPath();
+  x = Math.floor((Math.random() * c.width) + 1);
+  y = Math.floor((Math.random() * c.height) + 1);
+  len = Math.floor((Math.random() * c.width / 30) + 1);
+  fontsize = Math.floor((Math.random() * c.width / 10) + 1);
+  
+  ctx.fillText(makeword(len), x, y);
+  ctx.stroke();
+ }
+}
+</script> 
+
+</body>
+</html>
