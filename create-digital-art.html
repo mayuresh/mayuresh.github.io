@@ -54,6 +54,7 @@ function drawCircle(ctx, width, height, color) {
   ctx.arc(x, y, size, 0, 2 * Math.PI);
   ctx.fillStyle = color;
   ctx.fill();
+  ctx.strokeStyle = color;
   ctx.stroke();
 }
     
@@ -66,6 +67,7 @@ function drawRectangle(ctx, width, height, color) {
   ctx.rect(x,y,w,h);
   ctx.fillStyle = color;
   ctx.fill();
+  ctx.strokeStyle = color;
   ctx.stroke();
 }
     
